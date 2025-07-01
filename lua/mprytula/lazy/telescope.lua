@@ -1,17 +1,28 @@
 return {
-    "nvim-telescope/telescope.nvim",
-    dependencies = {
-        "nvim-lua/plenary.nvim"
-    },
-    config = function()
-        require('telescope').setup({})
-        local builtin = require('telescope.builtin')
+	"nvim-telescope/telescope.nvim",
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+	},
+	config = function()
+		require("telescope").setup({})
+		local builtin = require("telescope.builtin")
 
-        vim.keymap.set('n', '<leader>pf', function()
-            builtin.find_files({ prompt_title = "Project Files", cwd = vim.fn.getcwd(), ignore = true, follow = true })
-        end)
-        vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-        vim.keymap.set('n', '<C-p>', builtin.git_files, {})
-        vim.keymap.set('n', '<leader>fg', builtin.live_grep)
-    end
+		defaults = {
+			file_ignore_patterns = {
+				"node_modules",
+				"dist",
+				"%.lock",
+				"%.git/",
+				"__pycache__",
+				"%.DS_Store",
+			},
+		}
+
+		vim.keymap.set("n", "<leader>pf", function()
+			builtin.find_files({ prompt_title = "Project Files", cwd = vim.fn.getcwd(), ignore = true, follow = true })
+		end)
+		vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+		vim.keymap.set("n", "<C-p>", builtin.git_files, {})
+		vim.keymap.set("n", "<leader>fg", builtin.live_grep)
+	end,
 }
