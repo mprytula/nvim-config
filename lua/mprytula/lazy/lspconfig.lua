@@ -2,17 +2,20 @@ return {
 	"neovim/nvim-lspconfig",
 	config = function()
 		local lspconfig = require("lspconfig")
-		lspconfig.ts_ls.setup({
+
+		local vtsls_config = {
 			on_attach = function(client, bufnr)
-				-- Enable code actions
 				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code Actions" })
 			end,
-		})
-		lspconfig.lua_ls.setup({
+		}
+
+		local lua_ls_config = {
 			on_attach = function(client, bufnr)
-				-- Enable code actions
 				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code Actions" })
 			end,
-		})
+		}
+
+		lspconfig.vtsls.setup(vtsls_config)
+		lspconfig.lua_ls.setup(lua_ls_config)
 	end,
 }
